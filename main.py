@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from telegram import Bot, constants
+from telegram import Bot
 from markdown_builder.document import MarkdownDocument
 
 import os

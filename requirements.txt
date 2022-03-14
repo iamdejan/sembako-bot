@@ -1,7 +1,10 @@
+python-dotenv==0.19.2
 fastapi==0.75.0
+pydantic==1.9.0
 uvicorn[standard]==0.17.6
 python-telegram-bot==13.11
 mypy==0.940
 pycodestyle==2.8.0
 types-requests==2.27.11
 markdown-builder==0.1.2
+requests==2.27.1
