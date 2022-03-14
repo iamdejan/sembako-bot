@@ -1,13 +1,15 @@
 from fastapi import FastAPI
-from TelegramBot8 import TeleBot
-# from response import PDPResponse
+from telegram import Bot, constants
+from markdown_builder.document import MarkdownDocument
 
 import os
+from dotenv import load_dotenv
 import requests
 import json
 
-API_KEY = os.getenv("API_KEY")
-bot: TeleBot = TeleBot(API_KEY)
+load_dotenv()
+
+bot: Bot = Bot(token=os.getenv("API_KEY"))
 app: FastAPI = FastAPI()
 
 
@@ -18,7 +20,9 @@ def root_get() -> str:
 
 @app.post("/execute")
 def execute():
-    http_response: requests.Response = load_data()
+    shop_domain = "rafaeyzaparfume"
+    product_key = "minyak-goreng-minyak-sayur-sunco-2l"
+    http_response: requests.Response = load_data(shop_domain, product_key)
     responses: list = json.loads(http_response.text)
     components: list = responses[0]["data"]["pdpGetLayout"]["components"]
     product_components: list = [
@@ -26,24 +30,34 @@ def execute():
     ]
     product_component = product_components[0]
     product_data = product_component["data"][0]
-    print(product_data)
 
-    # {'name': 'Sunco Minyak Goreng Refill Pouch 2L', 'price': {'value': 39500, 'currency': 'IDR', '__typename': 'pdpContentSnapshotPrice'}, 'stock': {'useStock': True, 'value': '9975', 'stockWording': '', '__typename': 'pdpContentSnapshotStock'}, 'wholesale': [], '__typename': 'pdpDataProductContent'}
     name = product_data["name"]
     price = int(product_data["price"]["value"])
-    # TODO dejan: send chat message
-    pass
+    stock = int(product_data["stock"]["value"])
+
+    md = MarkdownDocument()
+    md.append_text(f"Nama = {name}")
+    if stock >= 1:
+        md.append_text(f"Harga = {price}")
+        md.append_text(f"Stok = {stock}")
+    else:
+        md.append_text("STOK HABIS!")
+    md.append_text(f"Link = http://tokopedia.com/{shop_domain}/{product_key}")
+    message: str = md.contents()
+    md.close()
+    bot.send_message(chat_id="1661005444", text=message)
 
 
-def load_data() -> requests.Response:
+
+def load_data(shop_domain: str, product_key: str) -> requests.Response:
     url = "https://gql.tokopedia.com/graphql/PDPGetLayoutQuery"
 
     payload = json.dumps([
         {
             "operationName": "PDPGetLayoutQuery",
             "variables": {
-                "shopDomain": "goodsarena",
-                "productKey": "sunco-minyak-goreng-refill-pouch-2l",
+                "shopDomain": f"{shop_domain}",
+                "productKey": f"{product_key}",
                 "layoutID": "",
                 "apiVersion": 1,
                 "userLocation": {
