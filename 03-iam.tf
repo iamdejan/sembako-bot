@@ -5,7 +5,7 @@ resource "google_project_iam_policy" "project" {
 
 data "google_iam_policy" "admin" {
   binding {
-    role = "roles/editor"
+    role = "roles/owner"
 
     members = [
       "serviceAccount:${google_service_account.sembako_account.email}"
