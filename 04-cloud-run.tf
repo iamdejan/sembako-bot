@@ -23,11 +23,11 @@ resource "google_cloud_run_service" "sembako" {
   }
 }
 
-resource "google_cloud_run_service_iam_policy" "policy" {
+resource "google_cloud_run_service_iam_binding" "binding" {
   location = google_cloud_run_service.sembako.location
   project  = google_cloud_run_service.sembako.project
   service  = google_cloud_run_service.sembako.name
-  role     = "roles/run.admin"
+  role     = "roles/viewer"
   members = [
     "serviceAccount:${google_service_account.sembako_account.email}"
   ]
