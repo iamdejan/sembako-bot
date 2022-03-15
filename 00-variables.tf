@@ -12,3 +12,7 @@ variable "zone" {
   description = "Zone inside chosen region."
   default = "asia-southeast2-a"
 }
+
+variable "api_key" {
+  description = "API key for Telegram bot."
+}

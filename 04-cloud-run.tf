@@ -6,6 +6,13 @@ resource "google_cloud_run_service" "sembako" {
     spec {
       containers {
         image = "asia.gcr.io/scheduled-chat-bot/sembako-bot:latest"
+        env {
+          name = "API_KEY"
+          value = var.api_key
+        }
+        ports {
+          container_port = 8000
+        }
       }
     }
   }
