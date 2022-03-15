@@ -23,12 +23,18 @@ resource "google_cloud_run_service" "sembako" {
   }
 }
 
-resource "google_cloud_run_service_iam_binding" "binding" {
-  location = google_cloud_run_service.sembako.location
-  project  = google_cloud_run_service.sembako.project
-  service  = google_cloud_run_service.sembako.name
-  role     = "roles/viewer"
-  members = [
-    "serviceAccount:${google_service_account.sembako_account.email}"
-  ]
+data "google_iam_policy" "runner" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "serviceAccount:${google_service_account.sembako_account.email}"
+    ]
+  }
+}
+
+resource "google_cloud_run_service_iam_policy" "runner" {
+  location    = google_cloud_run_service.sembako.location
+  project     = google_cloud_run_service.sembako.project
+  service     = google_cloud_run_service.sembako.name
+  policy_data = data.google_iam_policy.noauth.policy_data
 }
