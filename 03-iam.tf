@@ -1,17 +1,14 @@
-resource "google_project_iam_binding" "cloud_functions" {
-  project = var.project
-  role    = "roles/cloudfunctions.admin"
-
-  members = [
-    "serviceAccount:${google_service_account.sembako_account.email}"
-  ]
+resource "google_project_iam_policy" "project" {
+  project     = var.project
+  policy_data = data.google_iam_policy.admin.policy_data
 }
 
-resource "google_project_iam_binding" "cloud_scheduler" {
-  project = var.project
-  role    = "roles/cloudscheduler.admin"
+data "google_iam_policy" "admin" {
+  binding {
+    role = "roles/editor"
 
-  members = [
-    "serviceAccount:${google_service_account.sembako_account.email}"
-  ]
+    members = [
+      "serviceAccount:${google_service_account.sembako_account.email}"
+    ]
+  }
 }
