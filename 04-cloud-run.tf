@@ -16,15 +16,6 @@ resource "google_cloud_run_service" "sembako" {
   }
 }
 
-data "google_iam_policy" "admin" {
-  binding {
-    role = "roles/viewer"
-    members = [
-      "serviceAccount:${google_service_account.sembako_account.email}"
-    ]
-  }
-}
-
 resource "google_cloud_run_service_iam_policy" "policy" {
   location = google_cloud_run_service.default.location
   project = google_cloud_run_service.default.project
