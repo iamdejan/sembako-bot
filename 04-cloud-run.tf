@@ -17,8 +17,8 @@ resource "google_cloud_run_service" "sembako" {
 }
 
 resource "google_cloud_run_service_iam_policy" "policy" {
-  location = google_cloud_run_service.default.location
-  project = google_cloud_run_service.default.project
-  service = google_cloud_run_service.default.name
+  location = google_cloud_run_service.sembako.location
+  project = google_cloud_run_service.sembako.project
+  service = google_cloud_run_service.sembako.name
   policy_data = data.google_iam_policy.admin.policy_data
 }
