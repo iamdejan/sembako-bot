@@ -36,5 +36,5 @@ resource "google_cloud_run_service_iam_policy" "runner" {
   location    = google_cloud_run_service.sembako.location
   project     = google_cloud_run_service.sembako.project
   service     = google_cloud_run_service.sembako.name
-  policy_data = data.google_iam_policy.noauth.policy_data
+  policy_data = data.google_iam_policy.runner.policy_data
 }
