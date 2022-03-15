@@ -5,7 +5,7 @@ resource "google_cloud_run_service" "sembako" {
   template {
     spec {
       containers {
-        image = "" # TODO dejan: upload dlu ke Artifact Registry / Docker Hub
+        image = "asia.gcr.io/scheduled-chat-bot/sembako-bot:latest"
       }
     }
   }
