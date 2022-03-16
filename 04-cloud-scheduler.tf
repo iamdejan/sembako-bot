@@ -1,7 +1,7 @@
 resource "google_cloud_scheduler_job" "sembako" {
   name             = "sembako-job"
   description      = "Sembako job"
-  schedule         = "* * * * *"
+  schedule         = "0 0 * * *"
   time_zone        = var.time_zone
   attempt_deadline = "320s"
 
