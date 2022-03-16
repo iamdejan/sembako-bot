@@ -7,7 +7,7 @@ resource "google_cloud_scheduler_job" "sembako" {
 
   http_target {
     http_method = "POST"
-    uri         = "https://sembako-bot-tmnmmjo4aq-et.a.run.app/execute"
+    uri         = "${google_cloud_run_service.sembako.status[0].url}/execute"
 
     oidc_token {
       service_account_email = google_service_account.sembako_account.email
