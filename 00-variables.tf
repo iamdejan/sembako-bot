@@ -16,3 +16,8 @@ variable "zone" {
 variable "api_key" {
   description = "API key for Telegram bot."
 }
+
+variable "time_zone" {
+  description = "Time zone for scheduler."
+  default = "Asia/Jakarta"
+}
