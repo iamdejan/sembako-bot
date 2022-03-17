@@ -1,7 +1,7 @@
 FROM python:3.9.10-bullseye
 
 WORKDIR /app
-COPY main.py mypy.ini requirements.txt ./
+COPY . .
 
 RUN pip3 install -r requirements.txt
 
