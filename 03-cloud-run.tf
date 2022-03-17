@@ -5,7 +5,7 @@ resource "google_cloud_run_service" "sembako" {
   template {
     spec {
       containers {
-        image = "asia.gcr.io/scheduled-chat-bot/sembako-bot:${tag_version}"
+        image = "asia.gcr.io/scheduled-chat-bot/sembako-bot:${var.tag_version}"
         env {
           name  = "API_KEY"
           value = var.api_key
