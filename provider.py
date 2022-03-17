@@ -1,5 +1,6 @@
 from abc import ABC, abstractclassmethod
 from markdown_builder.document import MarkdownDocument
+from typing import Optional
 
 import json
 import requests
@@ -9,16 +10,33 @@ class Provider(ABC):
 
     def provide_message(self) -> str:
         http_response = self.call_endpoint()
-        return self.process_data(http_response)
-
+        return self.process_response(http_response)
 
     @abstractclassmethod
     def call_endpoint(self) -> requests.Response:
         pass
 
+    @abstractclassmethod
+    def process_response(self, http_response: requests.Response) -> str:
+        pass
+
+    def construct_message(self, name: str, price: int, stock: int, link: str) -> str:
+        md = MarkdownDocument()
+        md.append_text(f"Sumber: {self.get_provider()}")
+        md.append_text(f"Nama: {name}")
+        if stock >= 1:
+            md.append_text(f"Harga: {price}")
+            md.append_text(f"Stok: {stock}")
+        else:
+            md.append_text("STOK HABIS!")
+        if link != "":
+            md.append_text(f"Link: {link}")
+        message: str = md.contents()
+        md.close()
+        return message
 
     @abstractclassmethod
-    def process_data(self, http_response: requests.Response) -> str:
+    def get_provider(self) -> str:
         pass
 
 
@@ -27,7 +45,6 @@ class TokopediaProvider(Provider):
     def __init__(self, shop_domain: str, product_key: str) -> None:
         self.shop_domain = shop_domain
         self.product_key = product_key
-
 
     def call_endpoint(self) -> requests.Response:
         url = "https://gql.tokopedia.com/graphql/PDPGetLayoutQuery"
@@ -70,8 +87,7 @@ class TokopediaProvider(Provider):
 
         return requests.request("POST", url, headers=headers, data=payload)
 
-
-    def process_data(self, http_response: requests.Response) -> str:
+    def process_response(self, http_response: requests.Response) -> str:
         responses: list = json.loads(http_response.text)
         components: list = responses[0]["data"]["pdpGetLayout"]["components"]
         product_components: list = [
@@ -83,15 +99,47 @@ class TokopediaProvider(Provider):
         name = product_data["name"]
         price = int(product_data["price"]["value"])
         stock = int(product_data["stock"]["value"])
+        link = f"http://tokopedia.com/{self.shop_domain}/{self.product_key}"
+        return self.construct_message(name, price, stock, link)
 
-        md = MarkdownDocument()
-        md.append_text(f"Nama: {name}")
-        if stock >= 1:
-            md.append_text(f"Harga: {price}")
-            md.append_text(f"Stok: {stock}")
-        else:
-            md.append_text("STOK HABIS!")
-        md.append_text(f"Link: http://tokopedia.com/{self.shop_domain}/{self.product_key}")
-        message: str = md.contents()
-        md.close()
-        return message
+    def get_provider(self) -> str:
+        return "TOKOPEDIA"
+
+
+class SegariProvider(Provider):
+
+    def __init__(self, search_keyword: str) -> None:
+        self.search_keyword = search_keyword
+
+    def call_endpoint(self) -> requests.Response:
+        url = f"https://api-v2.segari.id/v1.1/products/price?agentId=311&search={self.search_keyword}&size=40&page=0&paginationType=slice"
+
+        headers = {
+            'Connection': 'keep-alive',
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36',
+            'Accept': '*/*',
+            'Sec-GPC': '1',
+            'Origin': 'https://segari.id',
+            'Sec-Fetch-Site': 'same-site',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Dest': 'empty',
+            'Referer': 'https://segari.id/',
+            'Accept-Language': 'en-US,en;q=0.9'
+        }
+
+        return requests.request("GET", url, headers=headers, data={})
+
+    def process_response(self, http_response: requests.Response) -> str:
+        response: dict = json.loads(http_response.text)
+        wrapper: dict = response["data"]
+        data: list = wrapper["data"]
+        datum: dict = data[0]
+        product_dto: dict = datum["productDTO"]
+        name: str = f'{product_dto["name"]} {product_dto["sellingUnit"]}'
+        price: int = round(datum["price"])
+        stock: int = int(datum["availableQuantity"])
+        link = ""
+        return self.construct_message(name, price, stock, link)
+
+    def get_provider(self) -> str:
+        return "SEGARI"
