@@ -1,8 +1,7 @@
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from markdown_builder.document import MarkdownDocument
 from telegram import Bot
-from provider import Provider, SegariProvider, TokopediaProvider
+from provider import Provider, SegariProvider, TokopediaProvider, ShopeeMallProvider
 
 import os
 
@@ -21,25 +20,6 @@ def root_get() -> str:
 @app.post("/execute")
 def execute():
     providers: list[Provider] = [
-        TokopediaProvider(
-            shop_domain="rafaeyzaparfume",
-            product_key="minyak-goreng-minyak-sayur-sunco-2l"
-        ),
-        SegariProvider(
-            "Beras Setra Ramos Topi Koki"
-        ),
-        SegariProvider(
-            "Gula Rose Brand Premium 1 Kg"
-        ),
-        SegariProvider(
-            "Sosis Sapi Bratwurst Kanzler"
-        ),
-        SegariProvider(
-            "Nugget Ayam Fiesta"
-        ),
-        SegariProvider(
-            "Spicy Wing Fiesta"
-        ),
         SegariProvider(
             "Sari Roti - Roti Tawar Special"
         ),
@@ -50,7 +30,42 @@ def execute():
             "Susu Greenfields Cokelat 1 Liter"
         ),
         SegariProvider(
+            "Gula Rose Brand Premium 1 Kg"
+        ),
+        SegariProvider(
+            "Sosis Sapi Bratwurst Kanzler"
+        ),
+        SegariProvider(
             "Indomie Goreng Bundle Isi 5"
+        ),
+        SegariProvider(
+            "Nugget Ayam Fiesta"
+        ),
+        SegariProvider(
+            "Spicy Wing Fiesta"
+        ),
+        SegariProvider(
+            "Beras Setra Ramos Topi Koki"
+        ),
+        TokopediaProvider(
+            shop_domain="unilever-food",
+            product_key="twin-pack-bango-kecap-manis-6-2kg"
+        ),
+        TokopediaProvider(
+            shop_domain="abc-official",
+            product_key="abc-kecap-asin-6-kg"
+        ),
+        TokopediaProvider(
+            shop_domain="finger-land",
+            product_key="borges-extra-light-olive-oil-minyak-zaitun-5-l"
+        ),
+        TokopediaProvider(
+            shop_domain="needlife",
+            product_key="sunco-minyak-goreng-refill-2l"
+        ),
+        ShopeeMallProvider(
+            item_id=11256156456,
+            shop_id=379357698
         )
     ]
     for provider in providers:
