@@ -11,12 +11,14 @@ class Provider(ABC):
         http_response = self.call_endpoint()
         return self.process_data(http_response)
 
+
     @abstractclassmethod
     def call_endpoint(self) -> requests.Response:
         pass
 
+
     @abstractclassmethod
-    def process_data(self) -> str:
+    def process_data(self, http_response: requests.Response) -> str:
         pass
 
 
@@ -25,6 +27,7 @@ class TokopediaProvider(Provider):
     def __init__(self, shop_domain: str, product_key: str) -> None:
         self.shop_domain = shop_domain
         self.product_key = product_key
+
 
     def call_endpoint(self) -> requests.Response:
         url = "https://gql.tokopedia.com/graphql/PDPGetLayoutQuery"
