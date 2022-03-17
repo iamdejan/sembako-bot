@@ -1,6 +1,5 @@
 from abc import ABC, abstractclassmethod
 from markdown_builder.document import MarkdownDocument
-from typing import Optional
 
 import json
 import requests

@@ -19,12 +19,10 @@ def root_get() -> str:
 
 @app.post("/execute")
 def execute():
-    shop_domain = "rafaeyzaparfume"
-    product_key = "minyak-goreng-minyak-sayur-sunco-2l"
     providers: list[Provider] = [
         TokopediaProvider(
-            shop_domain,
-            product_key
+            shop_domain="rafaeyzaparfume",
+            product_key="minyak-goreng-minyak-sayur-sunco-2l"
         ),
         SegariProvider(
             "Beras Setra Ramos Topi Koki"
