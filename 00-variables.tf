@@ -21,3 +21,7 @@ variable "time_zone" {
   description = "Time zone for scheduler."
   default = "Asia/Jakarta"
 }
+
+variable "tag_version" {
+  description = "Tag version of the Docker image."
+}
