@@ -8,6 +8,7 @@ import os
 
 load_dotenv()
 
+chat_ids: list[str] = os.getenv("CHAT_IDS").__str__().strip().split(",")
 bot: Bot = Bot(token=os.getenv("API_KEY").__str__())
 app: FastAPI = FastAPI()
 
@@ -53,7 +54,9 @@ def execute():
         )
     ]
     for provider in providers:
-        bot.send_message(
-            chat_id="1661005444",
-            text=provider.provide_message()
-        )
+        message = provider.provide_message()
+        for chat_id in chat_ids:
+            bot.send_message(
+                chat_id=chat_id,
+                text=message
+            )
