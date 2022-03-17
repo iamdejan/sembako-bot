@@ -135,7 +135,7 @@ class SegariProvider(Provider):
         data: list = wrapper["data"]
         datum: dict = data[0]
         product_dto: dict = datum["productDTO"]
-        name: str = f'{product_dto["name"]} {product_dto["sellingUnit"]}'
+        name: str = f'{product_dto["name"]}, {product_dto["sellingUnit"]}'
         price: int = round(datum["price"])
         stock: int = int(datum["availableQuantity"])
         link = ""

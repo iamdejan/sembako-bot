@@ -28,6 +28,30 @@ def execute():
         ),
         SegariProvider(
             "Beras Setra Ramos Topi Koki"
+        ),
+        SegariProvider(
+            "Gula Rose Brand Premium 1 Kg"
+        ),
+        SegariProvider(
+            "Sosis Sapi Bratwurst Kanzler"
+        ),
+        SegariProvider(
+            "Nugget Ayam Fiesta"
+        ),
+        SegariProvider(
+            "Spicy Wing Fiesta"
+        ),
+        SegariProvider(
+            "Sari Roti - Roti Tawar Special"
+        ),
+        SegariProvider(
+            "Tous Les Jours - Burger Bun Wijen"
+        ),
+        SegariProvider(
+            "Susu Greenfields Cokelat 1 Liter"
+        ),
+        SegariProvider(
+            "Indomie Goreng Bundle Isi 5"
         )
     ]
     for provider in providers:
