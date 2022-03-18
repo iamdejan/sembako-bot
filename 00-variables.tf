@@ -25,3 +25,8 @@ variable "time_zone" {
 variable "tag_version" {
   description = "Tag version of the Docker image."
 }
+
+variable "chat_ids" {
+  description = "List of Telegram chat IDs that want to be sent automatic message."
+  default = "1661005444,1380613892,1637396348"
+}
