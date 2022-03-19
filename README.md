@@ -9,7 +9,7 @@ Run `pip3 install -r requirements.txt`.
 
 If you are using Mac M1 series and you cannot install `psycopg2`, follow [this guide](https://stackoverflow.com/a/67166417).
 
-### Run The Server
+### Run Locally
 Run `uvicorn main:app --reload`.
 
 ## References
