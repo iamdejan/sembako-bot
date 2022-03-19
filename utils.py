@@ -12,3 +12,6 @@ def give_help(bot: Bot, chat_id: int):
     md.append_text('`/help`: Untuk membuka menu bantuan.')
     bot.send_message(chat_id, text=md.contents())
     md.close()
+
+def inform_unknown_command(bot: Bot, chat_id: int):
+    bot.send_message(chat_id, text="Perintah ini tidak diketahui. Silakan ketik `/help` untuk melihat daftar perintah.")

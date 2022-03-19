@@ -7,7 +7,7 @@ from provider import Provider, \
     ShopeeMallProvider
 from playhouse.cockroachdb import CockroachDatabase
 from peewee import Model, BigIntegerField, CharField
-from utils import give_help
+from utils import give_help, inform_unknown_command
 
 import os
 
@@ -117,7 +117,6 @@ def receive_webhook(payload: dict):
         give_help(bot, chat_id=int(payload["message"]["chat"]["id"]))
     else:
         inform_unknown_command(payload)
-        pass
 
 
 def register(payload: dict):
@@ -134,18 +133,8 @@ def register(payload: dict):
 def unregister(payload: dict):
     chat_id = int(payload["message"]["chat"]["id"])
     with db.transaction():
-        User.delete().where(User.id == chat_id)
+        User.delete().where(User.id == chat_id).execute()
         bot.send_message(
             chat_id=chat_id,
             text="Anda tidak terdaftar lagi."
-        )
-
-
-def inform_unknown_command(payload: dict):
-    chat_id = int(payload["message"]["chat"]["id"])
-    with db.transaction():
-        User.delete().where(User.id == chat_id)
-        bot.send_message(
-            chat_id=chat_id,
-            text="Perintah ini tidak diketahui"
         )
