@@ -67,7 +67,7 @@ class TokopediaProvider(Provider):
                 "query": "fragment ProductHighlight on pdpDataProductContent {\n  name\n  price {\n    value\n    currency\n    __typename\n  }\n  stock {\n    useStock\n    value\n    stockWording\n    __typename\n  }\n  wholesale {\n    minQty\n    price {\n      value\n      currency\n      __typename\n    }\n    __typename\n  }\n}\n\nquery PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation, $extParam: String) {\n  pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation, extParam: $extParam) {\n    components {\n      name\n      type\n      position\n      data {\n        ...ProductHighlight\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
             }
         ])
-        headers = {
+        headers: dict = {
             'authority': 'gql.tokopedia.com',
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36',
             'content-type': 'application/json',
@@ -113,7 +113,7 @@ class SegariProvider(Provider):
     def call_endpoint(self) -> requests.Response:
         url = f"https://api-v2.segari.id/v1.1/products/price?agentId=311&search={self.search_keyword}&size=40&page=0&paginationType=slice"
 
-        headers = {
+        headers: dict = {
             'Connection': 'keep-alive',
             'User-Agent': 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36',
             'Accept': '*/*',
@@ -154,8 +154,8 @@ class ShopeeMallProvider(Provider):
     def call_endpoint(self) -> requests.Response:
         url = f"https://shopee.co.id/api/v4/item/get?itemid={self.item_id}&shopid={self.shop_id}"
 
-        payload = {}
-        headers = {
+        payload: dict = {}
+        headers: dict = {
             'accept': 'application/json',
             'content-type': 'application/json'
         }
