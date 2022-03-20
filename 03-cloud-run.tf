@@ -11,7 +11,7 @@ resource "google_cloud_run_service" "sembako" {
           value = var.api_key
         }
         env {
-          name = "DB_STRING"
+          name  = "DB_STRING"
           value = var.db_string
         }
         ports {

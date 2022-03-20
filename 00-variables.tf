@@ -19,7 +19,7 @@ variable "api_key" {
 
 variable "time_zone" {
   description = "Time zone for scheduler."
-  default = "Asia/Jakarta"
+  default     = "Asia/Jakarta"
 }
 
 variable "docker_image" {
