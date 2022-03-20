@@ -22,8 +22,8 @@ variable "time_zone" {
   default = "Asia/Jakarta"
 }
 
-variable "tag_version" {
-  description = "Tag version of the Docker image."
+variable "docker_image" {
+  description = "Docker image, along with either tag / SHA ID."
 }
 
 variable "db_string" {

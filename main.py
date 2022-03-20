@@ -12,6 +12,8 @@ from utils import give_help, inform_unknown_command
 import os
 
 
+load_dotenv()
+
 # TODO: temporary logic, future logic will use GCP secrets
 db_user: str = os.getenv("DB_USER").__str__()
 db_password: str = os.getenv("DB_PASSWORD").__str__()
@@ -31,8 +33,6 @@ class User(Model):
         database = db
         table_name = 'users'
 
-
-load_dotenv()
 
 bot: Bot = Bot(token=os.getenv("API_KEY").__str__())
 app: FastAPI = FastAPI()
