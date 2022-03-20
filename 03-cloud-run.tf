@@ -10,6 +10,10 @@ resource "google_cloud_run_service" "sembako" {
           name  = "API_KEY"
           value = var.api_key
         }
+        env {
+          name = "DB_STRING"
+          value = var.db_string
+        }
         ports {
           container_port = 8000
         }

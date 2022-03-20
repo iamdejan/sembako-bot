@@ -25,3 +25,7 @@ variable "time_zone" {
 variable "tag_version" {
   description = "Tag version of the Docker image."
 }
+
+variable "db_string" {
+  description = "Connection sring for CockroachDB."
+}
