@@ -3,8 +3,8 @@ FROM python:3.9.10-slim-bullseye
 WORKDIR /app
 COPY . .
 
-RUN apt update && \
-    apt install curl python3-psycopg2 && \
+RUN apt update -y && \
+    apt install -y curl python3-psycopg2 && \
     curl --create-dirs -o $HOME/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/392cd414-c163-46d8-bc80-b8c0dccbfb34/cert
 
 RUN pip3 install -r requirements.txt
