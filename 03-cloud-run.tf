@@ -10,10 +10,6 @@ resource "google_cloud_run_service" "sembako" {
           name  = "API_KEY"
           value = var.api_key
         }
-        env {
-          name  = "CHAT_IDS"
-          value = var.chat_ids
-        }
         ports {
           container_port = 8000
         }
