@@ -109,17 +109,17 @@ def execute():
 def receive_webhook(payload: dict):
     command = payload["message"]["text"]
     # TODO: refactor, use strategy pattern
-    if command == "/register":
-        register(payload)
-    elif command == "/unregister":
-        unregister(payload)
+    if command == "/subscribe":
+        subscribe(payload)
+    elif command == "/unsubscribe":
+        unsubscribe(payload)
     elif command == "/start" or command == "/help":
         give_help(bot=bot, chat_id=int(payload["message"]["chat"]["id"]))
     else:
         inform_unknown_command(bot=bot, chat_id=int(payload["message"]["chat"]["id"]))
 
 
-def register(payload: dict):
+def subscribe(payload: dict):
     chat_id = int(payload["message"]["chat"]["id"])
     name = f'{payload["message"]["chat"]["first_name"]} {payload["message"]["chat"]["last_name"]}'
     with db.transaction():
@@ -130,7 +130,7 @@ def register(payload: dict):
         )
 
 
-def unregister(payload: dict):
+def unsubscribe(payload: dict):
     chat_id = int(payload["message"]["chat"]["id"])
     with db.transaction():
         User.delete().where(User.id == chat_id).execute()
