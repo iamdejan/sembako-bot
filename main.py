@@ -11,7 +11,6 @@ from utils import give_help, inform_unknown_command
 
 import os
 
-
 load_dotenv()
 
 # TODO: temporary logic, future logic will use GCP secrets
@@ -24,6 +23,7 @@ db_name: str = os.getenv("DB_NAME").__str__()
 db_string: str = os.getenv("DB_STRING").__str__() or \
     f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?sslmode=verify-full&options=--cluster%3D{db_cluster}'
 db: CockroachDatabase = CockroachDatabase(db_string)
+
 
 class User(Model):
     id = BigIntegerField(primary_key=True)
