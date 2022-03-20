@@ -19,14 +19,13 @@ variable "api_key" {
 
 variable "time_zone" {
   description = "Time zone for scheduler."
-  default = "Asia/Jakarta"
+  default     = "Asia/Jakarta"
 }
 
-variable "tag_version" {
-  description = "Tag version of the Docker image."
+variable "docker_image" {
+  description = "Docker image, along with either tag / SHA ID."
 }
 
-variable "chat_ids" {
-  description = "List of Telegram chat IDs that want to be sent automatic message."
-  default = "1661005444,1380613892,1637396348"
+variable "db_string" {
+  description = "Connection sring for CockroachDB."
 }

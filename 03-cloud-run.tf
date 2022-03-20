@@ -5,14 +5,14 @@ resource "google_cloud_run_service" "sembako" {
   template {
     spec {
       containers {
-        image = "asia.gcr.io/scheduled-chat-bot/sembako-bot:${var.tag_version}"
+        image = var.docker_image
         env {
           name  = "API_KEY"
           value = var.api_key
         }
         env {
-          name  = "CHAT_IDS"
-          value = var.chat_ids
+          name  = "DB_STRING"
+          value = var.db_string
         }
         ports {
           container_port = 8000
@@ -31,6 +31,7 @@ data "google_iam_policy" "runner" {
   binding {
     role = "roles/run.invoker"
     members = [
+      "allUsers",
       "serviceAccount:${google_service_account.sembako_account.email}"
     ]
   }
