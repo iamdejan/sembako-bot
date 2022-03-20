@@ -114,9 +114,9 @@ def receive_webhook(payload: dict):
     elif command == "/unregister":
         unregister(payload)
     elif command == "/start" or command == "/help":
-        give_help(bot, chat_id=int(payload["message"]["chat"]["id"]))
+        give_help(bot=bot, chat_id=int(payload["message"]["chat"]["id"]))
     else:
-        inform_unknown_command(payload)
+        inform_unknown_command(bot=bot, chat_id=int(payload["message"]["chat"]["id"]))
 
 
 def register(payload: dict):

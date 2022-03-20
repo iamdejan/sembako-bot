@@ -6,7 +6,7 @@ COPY . .
 # need to install libpq-dev and gcc, see https://stackoverflow.com/a/67404591
 RUN apt update -y && \
     apt install -y curl libpq-dev gcc && \
-    curl --create-dirs -o /app/certs/root.crt -O https://cockroachlabs.cloud/clusters/392cd414-c163-46d8-bc80-b8c0dccbfb34/cert
+    curl --create-dirs -o /root/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/392cd414-c163-46d8-bc80-b8c0dccbfb34/cert
 
 RUN pip3 install -r requirements.txt
 
