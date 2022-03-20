@@ -10,8 +10,12 @@ def give_help(bot: Bot, chat_id: int):
     md.append_text('`/register`: Untuk mendaftarkan akun Anda agar menerima update setiap malam.')
     md.append_text('`/unregister`: Untuk menarik akun Anda dari update otomatis.')
     md.append_text('`/help`: Untuk membuka menu bantuan.')
-    bot.send_message(chat_id, text=md.contents())
+    bot.send_message(chat_id=chat_id, text=md.contents(), parse_mode="Markdown")
     md.close()
 
 def inform_unknown_command(bot: Bot, chat_id: int):
-    bot.send_message(chat_id, text="Perintah ini tidak diketahui. Silakan ketik `/help` untuk melihat daftar perintah.")
+    bot.send_message(
+        chat_id=chat_id,
+        text="Perintah ini tidak diketahui. Silakan ketik `/help` untuk melihat daftar perintah.",
+        parse_mode="Markdown"
+    )
