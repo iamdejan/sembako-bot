@@ -95,8 +95,8 @@ def get_price_updates_for_users(chat_ids: list[int]):
             product_key="sunco-minyak-goreng-refill-2l"
         ),
         ShopeeMallProvider(
-            item_id=11256156456,
-            shop_id=379357698
+            item_id="11256156456",
+            shop_id="379357698"
         )
     ]
     for provider in providers:
@@ -137,12 +137,11 @@ def subscribe(payload: dict):
 
 
 def unsubscribe(chat_id: int):
-    with db.transaction():
-        User.delete().where(User.id == chat_id).execute()
-        bot.send_message(
-            chat_id=chat_id,
-            text="Anda tidak terdaftar lagi."
-        )
+    User.delete().where(User.id == chat_id).execute()
+    bot.send_message(
+        chat_id=chat_id,
+        text="Anda tidak terdaftar lagi."
+    )
 
 
 def update(chat_id: int):
