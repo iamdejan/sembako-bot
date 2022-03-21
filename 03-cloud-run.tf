@@ -1,5 +1,12 @@
+resource "random_string" "random" {
+  length  = 4
+  special = false
+  upper   = false
+  number  = false
+}
+
 resource "google_cloud_run_service" "sembako" {
-  name     = "sembako-bot"
+  name     = "sembako-bot-${random_string.random.result}"
   location = var.region
 
   template {
