@@ -5,10 +5,10 @@ RUN apt update -y && \
     apt install -y curl libpq-dev gcc && \
     curl --create-dirs -o /root/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/392cd414-c163-46d8-bc80-b8c0dccbfb34/cert
 
-WORKDIR /app
-COPY . .
-
+COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
+
+COPY . .
 
 EXPOSE 8000
 ENV API_KEY ${API_KEY}
