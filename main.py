@@ -128,12 +128,12 @@ def receive_webhook(payload: dict):
 def subscribe(payload: dict):
     chat_id = int(payload["message"]["chat"]["id"])
     name = f'{payload["message"]["chat"]["first_name"]} {payload["message"]["chat"]["last_name"]}'
-    with db.transaction():
-        User.insert(id=chat_id, name=name).on_conflict_replace().execute()
-        bot.send_message(
-            chat_id=chat_id,
-            text="Selamat! Anda sudah terdaftar."
-        )
+
+    User.insert(id=chat_id, name=name).on_conflict_replace().execute()
+    bot.send_message(
+        chat_id=chat_id,
+        text="Selamat! Anda sudah terdaftar."
+    )
 
 
 def unsubscribe(chat_id: int):
