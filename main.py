@@ -43,10 +43,13 @@ def root_get() -> str:
     return "Hello world!"
 
 
-@app.post("/execute")
-def execute():
+@app.post("/prices")
+def get_price_update():
     chat_ids = [int(u.id) for u in User.select(User.id)]
+    get_price_updates_for_users(chat_ids)
 
+
+def get_price_updates_for_users(chat_ids: list[int]):
     providers: list[Provider] = [
         SegariProvider(
             "Sari Roti - Roti Tawar Special"
@@ -108,15 +111,18 @@ def execute():
 @app.post("/")
 def receive_webhook(payload: dict):
     command = payload["message"]["text"]
+    chat_id = int(payload["message"]["chat"]["id"])
     # TODO: refactor, use strategy pattern
     if command == "/subscribe":
         subscribe(payload)
     elif command == "/unsubscribe":
-        unsubscribe(payload)
+        unsubscribe(chat_id)
+    elif command == "/update":
+        update(chat_id)
     elif command == "/start" or command == "/help":
-        give_help(bot=bot, chat_id=int(payload["message"]["chat"]["id"]))
+        give_help(bot, chat_id)
     else:
-        inform_unknown_command(bot=bot, chat_id=int(payload["message"]["chat"]["id"]))
+        inform_unknown_command(bot, chat_id)
 
 
 def subscribe(payload: dict):
@@ -130,11 +136,15 @@ def subscribe(payload: dict):
         )
 
 
-def unsubscribe(payload: dict):
-    chat_id = int(payload["message"]["chat"]["id"])
+def unsubscribe(chat_id: int):
     with db.transaction():
         User.delete().where(User.id == chat_id).execute()
         bot.send_message(
             chat_id=chat_id,
             text="Anda tidak terdaftar lagi."
         )
+
+
+def update(chat_id: int):
+    get_price_updates_for_users(chat_ids=[chat_id])
+    pass
