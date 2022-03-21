@@ -38,7 +38,8 @@ data "google_iam_policy" "runner" {
   binding {
     role = "roles/run.invoker"
     members = [
-      "allUsers"
+      "allUsers",
+      "serviceAccount:${google_service_account.sembako_account.email}"
     ]
   }
 }
