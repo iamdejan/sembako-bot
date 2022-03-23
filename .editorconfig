@@ -1,0 +1,12 @@
+root = true
+
+[*]
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{py, md}]
+indent_size = 4
+
+[*.{tf, hcl}]
+indent_size = 2
