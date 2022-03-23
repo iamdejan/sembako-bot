@@ -17,8 +17,9 @@ A Telegram chat bot to send daily prices of various `sembako`.
 
 While initially this bot doesn't cover *every* item in `sembako`, it is easy to add more items.
 
-## How to Use
+## How to Use Bot
 1) Add `@tele_sembako_bot` in Telegram.
+    - Currently, the bot is only in Indonesian language, due to specific nature of `sembako`.
 2) Start by using `/start` command.
 
 ## Run Locally
