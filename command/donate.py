@@ -43,11 +43,15 @@ class DonateCommand(Command):
                 "text": "`1095 1517 0227` (nomor rekening) atau `gdejan1998` (Jago ID untuk sesama pemilik rekening Jago)"
             }
         ]
+
         for wallet in wallets:
             if wallet["is_qr"]:
-                self.bot.send_photo(
-                    chat_id=self.chat_id, photo=wallet["url"], caption=wallet["provider"])
+                self.bot.send_message(
+                    chat_id=self.chat_id,
+                    disable_web_page_preview=False,
+                    parse_mode="Markdown",
+                    text=f'[{wallet["provider"]}]({wallet["url"]})'
+                )
             else:
                 self.bot.send_message(
                     chat_id=self.chat_id, text=f'{wallet["provider"]}: {wallet["text"]}', parse_mode="Markdown")
-            pass
