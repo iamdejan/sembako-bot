@@ -8,4 +8,4 @@ class PersonalUpdateCommand(Command):
         self.chat_id = chat_id
 
     def execute(self):
-        get_price_updates_for_users(bot=self.bot, chat_ids=[self.chat_id])
+        get_price_updates_for_users(chat_ids=[self.chat_id])
