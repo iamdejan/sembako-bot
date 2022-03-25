@@ -4,7 +4,7 @@ A Telegram chat bot to send daily prices of various `sembako`.
 
 ## What is Sembako?
 
-`Sembako` is an shorthand in Indonesian language for `sembilan bahan pokok` (English translation: `nine main (food) commodities`). It refers to 9 necessities for daily living. These commodities are:
+`Sembako` is an abbreviation in Indonesian language for `sembilan bahan pokok` (English translation: `nine main (food) commodities`). It refers to 9 necessities for daily living. These commodities are:
 - Rice, sago and corn
 - Sugar (esp. granulated sugar)
 - Vegetables dan fruits
@@ -49,7 +49,7 @@ You can use `/donate` menu to see the information regarding available methods of
 
 ### Technical Support
 
-You can contribute in this repo, by helping me making unit tests, refactor, or adding other features.
+You can contribute in this repo, by creating unit tests, doing refactors, or adding other features.
 
 ## References
 - [Setup GCP Cloud functions Triggering by Cloud Schedulers with Terraform](https://medium.com/geekculture/setup-gcp-cloud-functions-triggering-by-cloud-schedulers-with-terraform-1433fbf1abbe)
