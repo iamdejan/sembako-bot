@@ -27,7 +27,8 @@ component "Google Cloud" {
         timezone = Asia/Jakarta
     }
 
-    Telegram --> cr: send messages from user
+    Telegram --> cr: send messages from users
+    cr --> Telegram: send messages to users
     cs ---> cr: trigger daily update
     cr --> db: get registered users
     cr ---> Segari: get sembako price
