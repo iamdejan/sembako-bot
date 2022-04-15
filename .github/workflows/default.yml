@@ -32,8 +32,8 @@ jobs:
           push: true
           tags: asia.gcr.io/scheduled-chat-bot/sembako-bot:latest
       - name: See SHA256 digest
-        run: 'echo ${{ steps.build-and-push.outputs.imageid }}:${{ steps.build-and-push.outputs.digest }}'
+        run: 'echo ${{ steps.build-and-push.outputs.digest }}'
       - name: Initialize Terraform
         run: 'terraform init'
       - name: Apply Terraform
-        run: "terraform apply -auto-approve -var api_key=${{ secrets.TELEGRAM_API_KEY }} -var db_string=${{ secrets.DB_STRING }} -var docker_image=asia.gcr.io/scheduled-chat-bot/sembako-bot@${{ steps.build-and-push.outputs.digest }} -replace=google_cloud_run_service.sembako"
+        run: "echo '${{ secrets.TELEGRAM_API_KEY }}\n${{ secrets.DB_STRING }}\nasia.gcr.io/scheduled-chat-bot/sembako-bot@${{ steps.build-and-push.outputs.digest }}' | terraform apply -auto-approve -replace=google_cloud_run_service.sembako"
