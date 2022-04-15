@@ -25,6 +25,8 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: '<1.2.0'
+      - name: Pull existing image
+        run: 'docker pull asia.gcr.io/scheduled-chat-bot/sembako-bot'
       - name: Build and push
         id: build-and-push
         uses: docker/build-push-action@v2
@@ -36,4 +38,4 @@ jobs:
       - name: Initialize Terraform
         run: 'terraform init'
       - name: Apply Terraform
-        run: "echo '${{ secrets.TELEGRAM_API_KEY }}\n${{ secrets.DB_STRING }}\nasia.gcr.io/scheduled-chat-bot/sembako-bot@${{ steps.build-and-push.outputs.digest }}' | terraform apply -auto-approve -replace=google_cloud_run_service.sembako"
+        run: "terraform apply -auto-approve -var 'api_key=${{ secrets.TELEGRAM_API_KEY }}' -var 'db_string=${{ secrets.DB_STRING }}' -var 'docker_image=asia.gcr.io/scheduled-chat-bot/sembako-bot@${{ steps.build-and-push.outputs.digest }}' -replace=google_cloud_run_service.sembako"
