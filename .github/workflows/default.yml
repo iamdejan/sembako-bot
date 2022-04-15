@@ -32,6 +32,7 @@ jobs:
           push: true
           tags: asia.gcr.io/scheduled-chat-bot/sembako-bot:latest
       - name: See SHA256 digest
+        run: 'echo ${{ steps.build-and-push.outputs.image }}:${{ steps.build-and-push.outputs.digest }}'
       - name: Initialize Terraform
         run: 'terraform init'
       - name: Apply Terraform
