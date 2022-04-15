@@ -6,12 +6,9 @@ from command.unsubscribe import UnsubscribeCommand
 from command.unknown import UnknownCommand
 from command.personal_update import PersonalUpdateCommand
 from database import User
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from typing import Dict
 from price import get_price_updates_for_users
-
-load_dotenv()
 
 app: FastAPI = FastAPI()
 
