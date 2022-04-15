@@ -25,8 +25,6 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: '<1.2.0'
-      - name: Pull existing image
-        run: 'docker pull asia.gcr.io/scheduled-chat-bot/sembako-bot'
       - name: Build and push
         id: build-and-push
         uses: docker/build-push-action@v2
