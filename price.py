@@ -7,6 +7,8 @@ from provider import Provider, \
 from telegram import Bot
 from typing import Optional
 
+import pytz
+
 
 def get_price_updates_for_users(chat_ids: list[int]):
     providers: list[Provider] = [
@@ -58,7 +60,8 @@ def get_price_updates_for_users(chat_ids: list[int]):
             shop_id="379357698"
         )
     ]
-    message: str = f"*TANGGAL: {datetime.today().strftime('%Y-%m-%d')}*\n\n"
+    tz = pytz.timezone("Asia/Jakarta")
+    message: str = f"*TANGGAL: {datetime.now(tz).strftime('%Y-%m-%d')}*\n\n"
     message.__add__("\n")
     for provider in providers:
         item_message: str = provider.provide_message()
