@@ -9,12 +9,14 @@ jobs:
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v3
-      - name: 'Mypy check'
-        uses: jpetrucciani/mypy-check@master
-        with:
-          path: '.'
-      - name: Python Style Checker
-        uses: andymckay/pycodestyle-action@0.1.3
+      - name: Install Python
+        uses: actions/setup-python@v3
+      - name: Install Mypy and Pycodestyle
+        run: 'pip install mypy pycodestyle'
+      - name: Install dependencies
+        run: 'pip install -r requirements.txt'
+      - name: Run Mypy
+        run: 'mypy main.py'
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
