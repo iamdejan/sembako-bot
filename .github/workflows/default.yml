@@ -15,8 +15,8 @@ jobs:
         run: 'pip install mypy pycodestyle'
       - name: Install dependencies
         run: 'pip install -r requirements.txt'
-      - name: Run Mypy
-        run: 'mypy main.py'
+      - name: Run Mypy and Pycodestyle
+        run: 'mypy main.py && pycodestyle main.py'
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
