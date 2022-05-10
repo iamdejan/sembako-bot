@@ -1,6 +1,6 @@
 terraform {
   backend "etcdv3" {
-    endpoints = ["34.101.208.94:2379"]
+    endpoints = ["34.101.107.21:2379"]
     lock      = true
     prefix    = "/sembako-bot"
   }

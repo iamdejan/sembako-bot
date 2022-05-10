@@ -1,6 +1,7 @@
 *.tf
 *.ini
 *.md
-**/.git
 *.hcl
-**/.github
+
+.git
+.github
