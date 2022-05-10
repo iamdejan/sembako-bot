@@ -1,6 +1,5 @@
 variable "project" {
   description = "Project ID on where these resources are located."
-  default     = "scheduled-chat-bot"
 }
 
 variable "region" {
