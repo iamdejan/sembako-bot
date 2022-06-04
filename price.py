@@ -52,8 +52,8 @@ def get_price_updates_for_users(chat_ids: list[int]):
             product_key="borges-extra-light-olive-oil-minyak-zaitun-5-l"
         ),
         TokopediaProvider(
-            shop_domain="needlife",
-            product_key="sunco-minyak-goreng-refill-2l"
+            shop_domain="samudrasembako",
+            product_key="minyak-sunco-pouch-2-liter"
         ),
         ShopeeMallProvider(
             item_id="11256156456",
