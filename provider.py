@@ -144,37 +144,3 @@ class SegariProvider(Provider):
 
     def get_provider(self) -> str:
         return "SEGARI"
-
-
-class ShopeeMallProvider(Provider):
-
-    def __init__(self, shop_id: str, item_id: str) -> None:
-        self.shop_id = shop_id
-        self.item_id = item_id
-
-
-    def call_endpoint(self) -> requests.Response:
-        url = f"https://shopee.co.id/api/v4/item/get?itemid={self.item_id}&shopid={self.shop_id}"
-
-        payload: dict = {}
-        headers: dict = {
-            'accept': 'application/json',
-            'content-type': 'application/json'
-        }
-
-        return requests.request("GET", url, headers=headers, data=payload)
-
-
-    def process_response(self, http_response: requests.Response) -> str:
-        response: dict = json.loads(http_response.text)
-        product = response["data"]
-
-        name = product["name"]
-        price = round(int(product["price"]) / 100000)
-        stock = product["stock"]
-        link = f'https://shopee.co.id/{name.replace(" ", "-")}-i.{self.shop_id}.{self.item_id}'
-        return self.construct_message(name, price, stock, link)
-
-
-    def get_provider(self) -> str:
-        return "SHOPEE MALL"

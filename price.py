@@ -2,8 +2,7 @@ from bot import BotProvider
 from datetime import datetime
 from provider import Provider, \
     SegariProvider, \
-    TokopediaProvider, \
-    ShopeeMallProvider
+    TokopediaProvider
 from telegram import Bot
 from typing import Optional
 
@@ -54,10 +53,6 @@ def get_price_updates_for_users(chat_ids: list[int]):
         TokopediaProvider(
             shop_domain="samudrasembako",
             product_key="minyak-sunco-pouch-2-liter"
-        ),
-        ShopeeMallProvider(
-            item_id="11256156456",
-            shop_id="379357698"
         )
     ]
     tz = pytz.timezone("Asia/Jakarta")
