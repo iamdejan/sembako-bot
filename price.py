@@ -1,8 +1,7 @@
 from bot import BotProvider
 from datetime import datetime
 from provider import Provider, \
-    SegariProvider, \
-    TokopediaProvider
+    SegariProvider
 from telegram import Bot
 from typing import Optional
 
@@ -33,21 +32,20 @@ def get_price_updates_for_users(chat_ids: list[int]):
         SegariProvider(
             "Beras Setra Ramos Topi Koki"
         ),
-        TokopediaProvider(
-            shop_domain="unilever-food",
-            product_key="twin-pack-bango-kecap-manis-6-2kg"
+        SegariProvider(
+            "Kecap Manis Bango Pouch"
         ),
-        TokopediaProvider(
-            shop_domain="abc-official",
-            product_key="abc-kecap-asin-6-kg"
+        SegariProvider(
+            "Kecap Asin Lee Kum Kee"
         ),
-        TokopediaProvider(
-            shop_domain="finger-land",
-            product_key="borges-extra-light-olive-oil-minyak-zaitun-5-l"
+        SegariProvider(
+            "Minyak Zaitun Filippo Berio"
         ),
-        TokopediaProvider(
-            shop_domain="samudrasembako",
-            product_key="minyak-sunco-pouch-2-liter"
+        SegariProvider(
+            "Minyak Goreng Filma 2 L"
+        ),
+        SegariProvider(
+            "Ayyomi Telur Ayam Kampoeng"
         )
     ]
     tz = pytz.timezone("Asia/Jakarta")
