@@ -71,19 +71,22 @@ class TokopediaProvider(Provider):
         ])
         headers: dict = {
             'authority': 'gql.tokopedia.com',
-            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36',
-            'content-type': 'application/json',
             'accept': '*/*',
-            'x-source': 'tokopedia-lite',
-            'x-device': 'desktop',
-            'x-tkpd-lite-service': 'zeus',
-            'x-tkpd-akamai': 'pdpGetLayout',
-            'sec-gpc': '1',
-            'origin': 'https://www.tokopedia.com',
-            'sec-fetch-site': 'same-site',
-            'sec-fetch-mode': 'cors',
             'accept-language': 'en-US,en;q=0.9',
-            'Cookie': '_abck=BF429C6FB640552EDD63CF3A40DCBF59~-1~YAAQniE1FzbmRyF/AQAAmknbYgf2Z/REhuYAjKaut0K+7+UMzIoLlo0iQk/0hhoB1nR931fD5UQY3A0K8g9gAFWLi80cXhvJtjQXhE4tzTDT5nCVZ/CK2A/Rz2OaQsweyBaOth+gxnv0GaeYWb5+KY62+03rkT7z5JQjMCs7W5ieoNYJm+HFRPXa3/4qVKldOhasaRNBnrkTBKpHWc5zbXoWWJDElE/dz+2fKkWbB/AgMDu0ug9G9lsUL3kYGP12YDd4CW1kQcBqQk/a650RKph3XRL9gk6Qf2zYDy9v8Jl9sjXczwnvFxdKMVezvZAK4ZrPlBTS1z3EwepG8MfupT2TJ4GJ38PSRuSTRy0cUP5jeoHoJsaKPJHHKG/lmVVdSW4zjFYgx5xm3/103tne+NJPAf1cLFi5mdUt~0~-1~-1; _abck=BF429C6FB640552EDD63CF3A40DCBF59~-1~YAAQtCE1Fx7tRGZ/AQAAhx/hggdD/3m+4fwhQXTqsKv9G44o+hx6Q4wEZAVIM0p0ljPYGd0T4kMbjn56DnuFE2f0ZA7L/5/yQkoU9usEtxH4rHEqPScI/x7Wn7C27t9Rh+jfybjQsdbW6SjtatrjbL4YnSwcGpuPY3S2XtwFvTvV4Ph29v9Y8/rsxlAWp7jEuWqFK1NvWeeH9QYH2ALebsJoCwhnf0WJ0GGK62dFuGUBqS+yzfDSHTJEnwfbn8Z5PAwiQK7ku+7p28RuFNQaREgDnYiqdzPgKv3y5GAJxdA7ZFjjh52BES1qIRBl/lyziMe3WudsEQZXdMFGvDe2yGzhonfB8yE4vfKxYLln7LtH21avQRQMBdJ1CKNkxxo4HsEILaaFWxx2Q7BbO3UbQCVtXpEXaZTLH2gJdQ==~-1~-1~-1; bm_sz=9ADD9106F2E975B01CCBA67D039B2050~YAAQtCE1Fx/tRGZ/AQAAhx/hgg+URPaewuO92kDf8XiYnow0u89lkJ1I6czHRSPj4k6rgAVYkdsnlNngHxIvbl8YYl5Rv4tukYhkkcovATC543gqtEGoQclEnWZJ6DXHRy8XI6SbMtpvlQWzn5LPDVOjxnDDRfghpNH9dPjiRPyeZzUBrnSpPp66t5f3zpKwUq6fJUmb84J6D3VXGnWmCFIB5Z201EIgSxsDasaKAjMHWgqqFexcUn6oWPSwFCHdgPS9PRzHfcD1S1wTDyZYjiaHj0WH5zi5awvuYcvd3bEiK+/kvcE=~4469557~3425592'
+            'content-type': 'application/json',
+            'cookie': '_UUID_NONLOGIN_=88ce9995c86f8518c5996f64e467d72e; _UUID_NONLOGIN_.sig=zH8N2utBtpoUKXO_yLpGTzGgQPY; bm_sz=F4BC8573A3337E8EC3E6DACC04E06389~YAAQxiE1F5GZBaSBAQAAY4LzrRDZGG9qSb8UUogUox34YfftKieYnyPB8HLwKSg3RZN9umF79VVmW9iBYI3LY57nAZKQAxt0s6mlQtv8aooK8qACzVUFGNxUdOJovd1F+KphY89EHSQE8BrfrDnnaDcqLR+n1Mc7J2WbS4chICn+8k/su/X8/209UKgadbPHYWG7Z2EYozjK6iej+sYFUthMSLXoTMBF8CyjsJ19yFDZKlcW+Q7J+qrIEadAT3GC+zg74UYr3ODVzI6/cDwJpmcyprn0xWKzL6sttAi9rwblohz53as=~3555891~3228728; _SID_Tokopedia_=crf3AiYTuhRopYoC2gLoAp4GU9D8SxfMrdMtKECxNHAU8FcixmzqimeUfacilmXxZ9Nb3viQfovnto3Ep2ss7Yo198ojqokB6JsXrte-dr9kiP6GUAZ0hUZsnCChO-Sq; DID=908adef22da574a33dc944ad09f042f4a1df17952e8bda33bf98626a6142d66e703f87fccf0a92ac0fa87d64ec8b4ceb; DID_JS=OTA4YWRlZjIyZGE1NzRhMzNkYzk0NGFkMDlmMDQyZjRhMWRmMTc5NTJlOGJkYTMzYmY5ODYyNmE2MTQyZDY2ZTcwM2Y4N2ZjY2YwYTkyYWMwZmE4N2Q2NGVjOGI0Y2Vi47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=; ak_bmsc=8B43579CDF4A2B3EC86D477BE38D2792~000000000000000000000000000000~YAAQxiE1F5qZBaSBAQAAuIXzrRDEUYObPpGC1r06wEAzPzMkBowpU9ZCNAnOB6oPr8HYHS9ylUSDI0ZVFHIMNzoZjXjGJmNnav0nlN4BuVXkGwRdZ7xi8D2LGzP2ERo3uovPtqaYoI0sf4ltk1WtL4Cl9+cTAHnG362xq0y82iVHAwADRfy/xr7oO1wye+R8vTzFpbN4zycksSAF8S+zBHLQJ56V2QCvJY7RyGlx6cNjs46kusmOOCCbeKxyZ0wDdWkF+40I7XhChgBDDukKow/d4ZlJNzTN/LoMPR1ftSx8xyaRcJ2eQmwPT49O9ck9pjFg+WpqCBBUkDSIF/p2+pYCLpoZVHcPFBH7y/Ody/rMqMHjgjU40usr0lgDSisKfrBgjVypydpUMaddSlo+UvTqlp+HqEcg/TW9PRtYx7nSk+nFggp9ank8GhkmmMSqjz35QF++KSR8Wk4/W45ivOzKX5MPdhoTTLMGADeHb/WCt1f7CyiqYhJXcgFO0A==; _UUID_CAS_=adfa1033-7528-4d36-b502-129dfe434dcb; _CASE_=7b22644964223a323237342c22614964223a302c226c626c223a224a616b61727461205075736174222c22634964223a3137362c226c6f6e67223a22222c226c6174223a22222c2270436f223a22222c22774964223a31323231303337352c22734964223a31313533303537332c227354797065223a223268222c22776873223a225b7b5c2277617265686f7573655f69645c223a31323231303337352c5c22736572766963655f747970655c223a5c2232685c222c5c225f5f747970656e616d655c223a5c2257617265686f757365735c227d2c7b5c2277617265686f7573655f69645c223a302c5c22736572766963655f747970655c223a5c2231356d5c222c5c225f5f747970656e616d655c223a5c2257617265686f757365735c227d5d227d; _abck=40F1AF91AA6432B0865B6B75C4058114~0~YAAQxiE1F9iZBaSBAQAA8aPzrQjPp1nEKRdmY5YvR7H9Gf3Xds3TkF3D/bmwcK6s4OjhGHotPvyamuY64RRyutQjFAin70ioTamkQxWijFGdNPcZCZUMT2EtBwRvpVcPUKgOw9pInwqCNL06+c1qJngpWXnl2QIlcGqV9KkL4TbMwgYwAmTfwdii8KqDj/vmPjff1GhwzyvShO63vtoJwY1JxxtgjKPSTMbJV37fqHxGiQlGTfHnmZ7Q7Acb8C42s9sBngAkEhsTk5z0q20cROELhZBrWQWqixjBDUhDuZXy5jqBBjsO53H9S/25z4hhfuyXwG6ICwEYZUl2gqvhMvFy8XRE/38BRDyxymoPCC3L4Qfh+9f2hyvUHuT3I4olxMai7ml2/Bl56pcRaeGxOvlr4QzVakdkljgH~-1~-1~-1; _gcl_au=1.1.165750307.1656480842; _gid=GA1.2.793316046.1656480842; _dc_gtm_UA-126956641-6=1; _ga_70947XW48P=GS1.1.1656480841.1.0.1656480841.60; _ga=GA1.2.1048257606.1656480842; _dc_gtm_UA-9801603-1=1; _abck=40F1AF91AA6432B0865B6B75C4058114~-1~YAAQxiE1FxScBaSBAQAAUXf2rQhIeRXlvJTYQluSdE8XJWY/EjD2NdNFd4+7qaDEqkNvezqFJnPIxA6doDj7JU7sBbi0YT+6Gt0T+wknpXeYg/FXwYPeo3XBJwHNbSP27iNIVwdJR2t4/cWfVJqDdsopBcyYjO627M0b6/76Di6nvfMUwDj3DOsBT00vrJtF681u9y0j9Bt8XMzsGy0giFnYIfLXgYc3IXifi9MJFECKILYh1djq9MfgxkL+EVxoOWI8OXLUaK7jKP4kcSNaBIeZeSvDzHb0cirtropzZ+cLPqO0hnJvn7+WIql5HaUflL+wdAzYmCpQEoM1KPpVGEzT1LWmruCWkwTAgM3EcqbZ9dnvCbAF59CMxteTAoUVlELc3gg0NEfVk6sRA+dBg1qOSsaIs35S8/QR~0~-1~-1',
+            'origin': 'https://www.tokopedia.com',
+            'referer': 'https://www.tokopedia.com/finger-land/borges-extra-light-olive-oil-minyak-zaitun-5-l',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'sec-gpc': '1',
+            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36',
+            'x-device': 'desktop',
+            'x-source': 'tokopedia-lite',
+            'x-tkpd-akamai': 'pdpGetLayout',
+            'x-tkpd-lite-service': 'zeus',
+            'x-version': 'c16ac3a'
         }
 
         return requests.request("POST", url, headers=headers, data=payload)
@@ -113,19 +116,19 @@ class SegariProvider(Provider):
         self.search_keyword = search_keyword
 
     def call_endpoint(self) -> requests.Response:
-        url = f"https://api-v2.segari.id/v1.1/products/price?agentId=311&search={self.search_keyword}&size=40&page=0&paginationType=slice"
+        url = f"https://api-v2.segari.id/v1.1/products/price?agentId=311&search={self.search_keyword}&variant=WITH_ELASTICSEARCH&size=40&page=0&paginationType=slice"
 
         headers: dict = {
-            'Connection': 'keep-alive',
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36',
             'Accept': '*/*',
-            'Sec-GPC': '1',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Connection': 'keep-alive',
             'Origin': 'https://segari.id',
-            'Sec-Fetch-Site': 'same-site',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Dest': 'empty',
             'Referer': 'https://segari.id/',
-            'Accept-Language': 'en-US,en;q=0.9'
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-site',
+            'Sec-GPC': '1',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36'
         }
 
         return requests.request("GET", url, headers=headers, data={})
