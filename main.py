@@ -15,6 +15,7 @@ app: FastAPI = FastAPI()
 
 @app.get("/healthcheck")
 def root_get() -> str:
+    print("Test log for Hello world")
     return "Hello world!"
 
 

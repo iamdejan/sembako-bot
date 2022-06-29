@@ -10,6 +10,10 @@ import pytz
 
 
 def get_price_updates_for_users(chat_ids: list[int]):
+    bot: Optional[Bot] = BotProvider.get()
+    if bot is None:
+        return
+
     providers: list[Provider] = [
         SegariProvider(
             "Sari Roti - Roti Tawar Special"
@@ -61,10 +65,8 @@ def get_price_updates_for_users(chat_ids: list[int]):
     for provider in providers:
         item_message: str = provider.provide_message()
         message = message + item_message + "\n"
+        print(f"completed item_message = {item_message}")
 
-    bot: Optional[Bot] = BotProvider.get()
-    if bot is None:
-        return
     for chat_id in chat_ids:
         bot.send_message(
             chat_id=chat_id,
