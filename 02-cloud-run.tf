@@ -22,7 +22,7 @@ resource "google_cloud_run_service" "sembako" {
         resources {
           limits = {
             cpu    = "2m"
-            memory = "8000Mi"
+            memory = "2000Mi"
           }
         }
       }
