@@ -4,7 +4,8 @@ resource "google_cloud_run_service" "sembako" {
 
   template {
     spec {
-      timeout_seconds = 1200
+      timeout_seconds = 60
+      container_concurrency = 1
       containers {
         image = var.docker_image
         env {
