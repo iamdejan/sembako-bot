@@ -16,16 +16,7 @@ def get_price_updates_for_users(chat_ids: list[int]):
 
     providers: list[Provider] = [
         SegariProvider(
-            "Sari Roti - Roti Tawar Special"
-        ),
-        SegariProvider(
-            "Tous Les Jours - Burger Bun Wijen"
-        ),
-        SegariProvider(
             "Susu Greenfields Cokelat 1 Liter"
-        ),
-        SegariProvider(
-            "Gula Rose Brand Premium 1 Kg"
         ),
         SegariProvider(
             "Sosis Sapi Bratwurst Kanzler"

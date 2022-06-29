@@ -48,6 +48,8 @@ class TokopediaProvider(Provider):
         self.product_key = product_key
 
     def call_endpoint(self) -> requests.Response:
+        print("preparing to call Tokopedia GraphQL endpoint...")
+
         url = "https://gql.tokopedia.com/graphql/PDPGetLayoutQuery"
 
         payload = json.dumps([
@@ -92,6 +94,8 @@ class TokopediaProvider(Provider):
         return requests.request("POST", url, headers=headers, data=payload)
 
     def process_response(self, http_response: requests.Response) -> str:
+        print("preparing to process response from Tokopedia endpoint...")
+
         responses: list = json.loads(http_response.text)
         components: list = responses[0]["data"]["pdpGetLayout"]["components"]
         product_components: list = [
@@ -116,6 +120,8 @@ class SegariProvider(Provider):
         self.search_keyword = search_keyword
 
     def call_endpoint(self) -> requests.Response:
+        print("preparing to call Segari endpoint...")
+
         url = f"https://api-v2.segari.id/v1.1/products/price?agentId=311&search={self.search_keyword}&variant=WITH_ELASTICSEARCH&size=40&page=0&paginationType=slice"
 
         headers: dict = {
@@ -134,6 +140,8 @@ class SegariProvider(Provider):
         return requests.request("GET", url, headers=headers, data={})
 
     def process_response(self, http_response: requests.Response) -> str:
+        print("preparing to process response from Segari endpoint...")
+
         response: dict = json.loads(http_response.text)
         wrapper: dict = response["data"]
         data: list = wrapper["data"]

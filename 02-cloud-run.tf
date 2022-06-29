@@ -18,6 +18,13 @@ resource "google_cloud_run_service" "sembako" {
         ports {
           container_port = 8000
         }
+
+        resources {
+          limits = {
+            cpu    = "2m"
+            memory = "8000Mi"
+          }
+        }
       }
     }
   }
