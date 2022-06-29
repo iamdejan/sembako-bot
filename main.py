@@ -42,9 +42,11 @@ def receive_webhook(payload: dict):
 
     command: Command = command_map[command_str]
     command.execute()
+    return "Done"
 
 
 @app.post("/prices")
 def get_price_update():
     chat_ids = [int(u.id) for u in User.select(User.id)]
     get_price_updates_for_users(chat_ids)
+    return "Done"
